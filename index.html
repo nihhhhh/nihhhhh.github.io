@@ -158,6 +158,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-目前小游戏的一些想法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/07/%E7%9B%AE%E5%89%8D%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">目前小游戏的一些想法</a>
+    </h1>
+  
+
+        
+        <a href="/2020/07/07/%E7%9B%AE%E5%89%8D%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2020-07-07T00:52:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>主要bug:<br><img src="/2020/07/07/%E7%9B%AE%E5%89%8D%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/mainbug.png" alt="alt"><br>如图所示，当玩家+炸弹多于两个的时候，炸弹爆炸后会出现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MissingReferenceException: The object of type &#39;Transform&#39; has been destroyed but you are still trying to access it.</span><br><span class="line">Your script should either check if it is null or you should not destroy the object.</span><br><span class="line">UnityEngine.Transform.get_position () (at &lt;4eca0aa85b9643a199169bb7e91fc8d3&gt;:0)</span><br><span class="line">AttackState.OnUpdate (EnemyController enemy) (at Assets&#x2F;Scripts&#x2F;Enemy&#x2F;FSM&#x2F;AttackState.cs:20)</span><br><span class="line">EnemyController.Update () (at Assets&#x2F;Scripts&#x2F;Enemy&#x2F;FSM&#x2F;EnemyController.cs:47)</span><br></pre></td></tr></table></figure>
+
+<p>解释起来就是代码中，炸弹爆炸了就被destroy了，但是代码还尝试访问原来的transform。</p>
+<p>想到的解决办法：<br>（1）用临时变量存储炸弹位置等信息，调用结束后再销毁空间，动作可以执行完，不用显示炸弹<br>（2）用一个检测变量，探测炸弹爆炸，增加一个判断，如果TargetPoint被销毁了就停止当前行为</p>
+<p>个人难点：<br>（1）不知道怎么创建一个这样的临时空间，类似一个链表一样<br>（2）检测物怎么判断每个炸弹要爆炸的时间点</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Little game, 2D</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/07/07/%E7%9B%AE%E5%89%8D%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-我的第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -391,6 +470,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Little game, 2D</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
